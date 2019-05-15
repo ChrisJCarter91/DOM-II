@@ -4,12 +4,13 @@
     //   
     //  }
 
-//mouseenter    
+//mouseenter or mouseover
 
 const titleHover = document.querySelector('h1');
 
-titleHover.addEventListener('mouseenter', function(event) {
+titleHover.addEventListener('mouseover', function(event) {
     event.target.style.color='blue';
+    event.stopPropagation();
 
     setTimeout(function() {
         event.target.style.color = "";
@@ -34,7 +35,7 @@ function zoom(event) {
     }
   
     // Restrict scale
-    scale = Math.min(Math.max(.1, scale), 1.5);
+    scale = Math.min(Math.max(.1, scale), 1.2);
   
     // Apply scale 
     el.style.transform = `scale(${scale})`;
@@ -81,6 +82,8 @@ if (newNav) {
     for (var i=0; i <newNav.length; i++) {
         newNav[i].addEventListener('mouseover', function(event) {
             event.target.style.color='blue';
+            event.stopPropagation();
+            event.preventDefault();
 
             setTimeout(function() {
                 event.target.style.color = "";
@@ -90,15 +93,24 @@ if (newNav) {
 
 
 
-const otherImgs = document.getElementsByClassName('img-content');
+const pText = document.querySelectorAll('p');
 
-if (otherImgs) {
-    for (var i=0; i <otherImgs.length; i++) {
-        otherImgs[i].addEventListener('mouseover', function(event) {
+if (pText) {
+    for (var i=0; i <pText.length; i++) {
+        pText[i].addEventListener('mouseover', function(event) {
             event.target.style.color='blue';
+            event.stopPropagation();
 
             setTimeout(function() {
                 event.target.style.color = "";
               }, 500);
             }, false);
         }};
+
+
+//resize
+
+window.addEventListener('resize', function(event) {
+    console.log("Something's Different!");
+});
+
